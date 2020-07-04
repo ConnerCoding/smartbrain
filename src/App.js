@@ -10,7 +10,7 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import Clarifai from 'clarifai';
 
-
+// Using Particles library for background
 const particlesParams = {
   particles: {
     number: {
@@ -23,6 +23,7 @@ const particlesParams = {
   }
 }
 
+// Clarifai API for face detection
 const app = new Clarifai.App({apiKey: '35f36d91636c41e18c73e488a92909e0'});
 
 
@@ -46,6 +47,7 @@ class App extends React.Component {
     }
   }
 
+  // Load user for signin and register
   loadUser = (data) => {
     this.setState({user: {
       id: data.id,
@@ -56,6 +58,7 @@ class App extends React.Component {
     }})
   }
   
+  // Using Clarifai API to detect face
   calcFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
@@ -69,14 +72,17 @@ class App extends React.Component {
     }
   }
 
+  // Display box via FaceRecognition.js
   displayFaceBox = (box) => {
     this.setState({box:box});
   }
 
+  // Read in img input
   onInputChange = (e) => {
     this.setState({input: e.target.value});
   }
 
+  // Set picture, run Clarifai API, update user info 
   onPictureSubmit = () => {
     this.setState({imageUrl: this.state.input});
     app.models.predict("a403429f2ddf4b49b307e318f00e528b", this.state.input)
@@ -99,6 +105,7 @@ class App extends React.Component {
     );
   }
 
+  // Set route and is signed in or not
   onChangeRoute = (route) => {
     if (route === 'signin' || route === 'register') {
       this.setState({isSignedIn: false});
