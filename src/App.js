@@ -49,13 +49,15 @@ class App extends React.Component {
 
   // Load user for signin and register
   loadUser = (data) => {
-    this.setState({user: {
+    this.setState(
+    {user: {
       id: data.id,
       name: data.name,
       email: data.email,
       entries: data.entries,
       joined: data.joined
-    }})
+    }});
+    this.setState({imageUrl: ''});
   }
   
   // Using Clarifai API to detect face
