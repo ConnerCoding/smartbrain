@@ -91,16 +91,17 @@ class App extends React.Component {
     .then(response => {
       if (response) {
         fetch('http://localhost:3000/image', {
-            method: 'put',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                id: this.state.user.id
-             })
-            })
-             .then(response => response.json())
-             .then(count => {
-               this.setState(Object.assign(this.state.user, { entries: count }))
-             })
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+              id: this.state.user.id
+          })
+        })
+          .then(response => response.json())
+          .then(count => {
+            this.setState(Object.assign(this.state.user, { entries: count }))
+          })
+          .catch(err => console.log(err))
       }
       this.displayFaceBox(this.calcFaceLocation(response))})
     .catch(err => console.log(err)
