@@ -27,24 +27,25 @@ const particlesParams = {
 const app = new Clarifai.App({apiKey: '35f36d91636c41e18c73e488a92909e0'});
 
 
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
+};
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
-    }
+    this.state = initialState;
   }
 
   // Load user for signin and register
@@ -57,7 +58,6 @@ class App extends React.Component {
       entries: data.entries,
       joined: data.joined
     }});
-    this.setState({imageUrl: ''});
   }
   
   // Using Clarifai API to detect face
@@ -111,7 +111,7 @@ class App extends React.Component {
   // Set route and is signed in or not
   onChangeRoute = (route) => {
     if (route === 'signin' || route === 'register') {
-      this.setState({isSignedIn: false});
+      this.setState(initialState);
     } else {
       this.setState({isSignedIn: true});
     }
