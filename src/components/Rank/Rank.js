@@ -1,6 +1,6 @@
 import React from 'react';
-// import './Rank.css';
 
+// Using the name and entries from the users state, display name and entry count
 const Rank = ({ name, entries }) => {
     return (
         <div>
