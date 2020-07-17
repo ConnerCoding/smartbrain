@@ -1,6 +1,7 @@
 import React from 'react';
 import './ImageLinkForm.css';
 
+// Track the input for the image url and when user clicks Detect
 const ImageLinkForm = ({ onInputChange, onPictureSubmit }) => {
     return (
         <div>
