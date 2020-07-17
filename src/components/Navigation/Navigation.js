@@ -1,5 +1,6 @@
 import React from 'react';
 
+// If user is signed in set route to signed in and display sign out, otherwise display sign in/register
 const Navigation = ({onChangeRoute, isSignedIn}) => {
     if (isSignedIn) {
     return (
