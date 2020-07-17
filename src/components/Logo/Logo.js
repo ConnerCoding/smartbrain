@@ -3,6 +3,7 @@ import Tilt from 'react-tilt';
 import './Logo.css';
 import brain from './brain.png';
 
+// Display the logo with a tilt utilizing react-tilt
 const Logo = () => {
     return (
         <div className='ma4 mt0'>
