@@ -23,6 +23,8 @@ class Register extends React.Component {
         this.setState({name: event.target.value});
     }
     
+    // Attempt to register with inputted name/email/pw - if correct
+    // use the responded user to run loadUser and set route = home 
     onSubmitSignin = () => {
         fetch('https://smartbrainztom.herokuapp.com/register', {
             method: 'post',

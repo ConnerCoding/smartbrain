@@ -18,6 +18,8 @@ class Signin extends React.Component {
         this.setState({signInPassword: event.target.value});
     }
     
+    // Attempt to signin with inputted email/pw - if correct
+    // use the responded user to run loadUser and set route = home
     onSubmitSignin = () => {
         fetch('https://smartbrainztom.herokuapp.com/signin', {
             method: 'post',
