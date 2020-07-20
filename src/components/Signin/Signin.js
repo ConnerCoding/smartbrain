@@ -19,7 +19,8 @@ class Signin extends React.Component {
     }
     
     // Attempt to signin with inputted email/pw - if correct
-    // use the responded user to run loadUser and set route = home
+    // use the responded user to run loadUser and set route to home
+    // using the onChangeRoute function from App.js
     onSubmitSignin = () => {
         fetch('https://smartbrainztom.herokuapp.com/signin', {
             method: 'post',
