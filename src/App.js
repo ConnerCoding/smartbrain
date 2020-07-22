@@ -118,6 +118,9 @@ class App extends React.Component {
     this.setState({route: route});
   }
 
+  // Render particles and navigation - then if route is home render
+  // logo rank imagelinkform and facerecognition - otherwise if route
+  // is signin render signin - otherwise render register
   render() {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (
