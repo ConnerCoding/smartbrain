@@ -2,6 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 For the backend source code: https://github.com/ConnerCoding/smartbrain-api/
 
+![Image of UI](https://github.com/ConnerCoding/smartbrain/blob/master/src/images/project.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
