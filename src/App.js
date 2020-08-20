@@ -10,6 +10,9 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import Clarifai from 'clarifai';
 
+// Add the dotenv package
+require('dotenv').config()
+
 // Using Particles library for background
 const particlesParams = {
   particles: {
@@ -24,7 +27,7 @@ const particlesParams = {
 }
 
 // Clarifai API for face detection
-const app = new Clarifai.App({apiKey: '35f36d91636c41e18c73e488a92909e0'});
+const app = new Clarifai.App({apiKey: process.env.REACT_APP_CLARIFIA_API_KEY});
 
 
 const initialState = {
