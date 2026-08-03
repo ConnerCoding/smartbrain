@@ -1,33 +1,38 @@
 import React from 'react';
 // import './Rank.css';
 
-class Signin extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            signInEmail: '',
-            signInPassword: ''
+            email: '',
+            password: '',
+            name: ''
         }
     }
 
     onEmailChange = (event) => {
-        this.setState({signInEmail: event.target.value});
+        this.setState({email: event.target.value});
     }
 
     onPasswordChange = (event) => {
-        this.setState({signInPassword: event.target.value});
+        this.setState({password: event.target.value});
+    }
+
+    onNameChange = (event) => {
+        this.setState({name: event.target.value});
     }
     
-    // Attempt to signin with inputted email/pw - if correct
-    // use the responded user to run loadUser and set route to home
-    // using the onChangeRoute function from App.js
+    // Attempt to register with inputted name/email/pw - if correct
+    // use the responded user to run loadUser and set route = home 
     onSubmitSignin = () => {
-        fetch('https://smartbrainztom.herokuapp.com/signin', {
+        fetch('https://smartbrainztom.herokuapp.com/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: this.state.signInEmail,
-                password: this.state.signInPassword
+                email: this.state.email,
+                password: this.state.password,
+                name: this.state.name
              })
         })
             .then(response => response.json())
@@ -36,19 +41,22 @@ class Signin extends React.Component {
                     this.props.loadUser(user);
                     this.props.onChangeRoute('home');
                 } else {
-                    alert('incorrect login');
+                    alert('Please enter your information.');
                 }
             })
     }
 
-    render() {
-        const { onChangeRoute } = this.props;
+    render () {
         return (
             <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">
                     <div className="measure">
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                            <legend className="f1 fw6 ph0 mh0">Sign In</legend>
+                            <legend className="f1 fw6 ph0 mh0">Register</legend>
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
+                                <input onChange={this.onNameChange} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="name"  id="name" />
+                            </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                                 <input onChange={this.onEmailChange} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address" />
@@ -59,10 +67,7 @@ class Signin extends React.Component {
                             </div>
                         </fieldset>
                         <div className="">
-                            <input onClick={this.onSubmitSignin} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in" />
-                        </div>
-                        <div className="lh-copy mt3">
-                            <p onClick={() => onChangeRoute('register')} className="f6 link dim black db pointer">Register</p>
+                            <input onClick={this.onSubmitSignin} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" />
                         </div>
                     </div>
                 </main>
@@ -71,4 +76,4 @@ class Signin extends React.Component {
     }
 }
 
-export default Signin;
+export default Register;
