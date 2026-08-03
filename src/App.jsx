@@ -5,13 +5,11 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import Particles from 'react-particles-js';
+import Particles, { ParticlesProvider } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import Clarifai from 'clarifai';
-
-// Add the dotenv package
-require('dotenv').config()
 
 // Using Particles library for background
 const particlesParams = {
@@ -20,14 +18,22 @@ const particlesParams = {
       value: 80,
       density: {
         enable: true,
-        value_area: 600
+        valueArea: 600
       }
     }
   }
 }
 
+const ParticleBackground = () => {
+  return (
+    <ParticlesProvider init={loadSlim}>
+      <Particles className="particles" options={particlesParams} />
+    </ParticlesProvider>
+  );
+};
+
 // Clarifai API for face detection
-const app = new Clarifai.App({apiKey: process.env.REACT_APP_CLARIFIA_API_KEY});
+const clarifaiApiKey = import.meta.env.REACT_APP_CLARIFIA_API_KEY;
 
 
 const initialState = {
@@ -89,6 +95,12 @@ class App extends React.Component {
 
   // Set picture, run Clarifai API, update user info 
   onPictureSubmit = () => {
+    if (!clarifaiApiKey) {
+      console.error('REACT_APP_CLARIFIA_API_KEY is required for face detection.');
+      return;
+    }
+
+    const app = new Clarifai.App({apiKey: clarifaiApiKey});
     this.setState({imageUrl: this.state.input});
     app.models.predict("a403429f2ddf4b49b307e318f00e528b", this.state.input)
     .then(response => {
@@ -128,7 +140,7 @@ class App extends React.Component {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
-        <Particles className='particles' params={particlesParams}/>
+        <ParticleBackground />
         <Navigation isSignedIn={isSignedIn} onChangeRoute={this.onChangeRoute} />
         { (route === 'home')
         ? <div>
